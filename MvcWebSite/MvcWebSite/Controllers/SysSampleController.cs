@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Apps.BLL;
+using Apps.Models;
 
 namespace MvcWebSite.Controllers
 {
@@ -11,7 +13,9 @@ namespace MvcWebSite.Controllers
         // GET: SysSample
         public ActionResult Index()
         {
-            return View();
+            SysSampleBLL bll = new SysSampleBLL();
+            List<SysSample> list = bll.GetList("");
+            return View(list);
         }
     }
 }
