@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Apps.Models;
+using Apps.Models.Sys;
+using Unity.Attributes;
 
 namespace Apps.BLL
 {
@@ -14,17 +16,34 @@ namespace Apps.BLL
     {
         DBContainer db = new DBContainer();
 
-        ISysSampleRepository rep = new SysSampleRepository();
+        [Dependency]
+        public ISysSampleRepository Rep { get; set; }
 
         /// <summary>
         /// 获取列表
         /// </summary>
         /// <param name="queryStr">搜索条件</param>
         /// <returns>数据列表</returns>
-        public List<SysSample> GetList(string queryStr)
+        public List<SysSampleModel> GetList(string queryStr)
         {
-            IQueryable<SysSample> queryData = rep.GetList(db);
-            return queryData.ToList();
+            IQueryable<SysSample> queryData = null;
+            queryData = Rep.GetList(db);
+            return CreateModelList(ref queryData);
+        }
+        private List<SysSampleModel> CreateModelList(ref IQueryable<SysSample> queryData)
+        {
+            List<SysSampleModel> modelList = (from r in queryData
+                                              select new SysSampleModel
+                                              {
+                                                  Id = r.Id,
+                                                  Name = r.Name,
+                                                  Age = r.Age,
+                                                  Bir = r.Bir,
+                                                  Photo = r.Photo,
+                                                  Note = r.Note,
+                                                  CreateTime = r.CreateTime
+                                              }).ToList();
+            return modelList;
         }
 
         /// <summary>
@@ -32,11 +51,26 @@ namespace Apps.BLL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool Create(SysSample entity)
+        public bool Create(SysSampleModel entity)
         {
             try
             {
-                if (rep.Create(entity) == 1)
+                SysSample sample = Rep.GetById(entity.Id);
+                if (sample != null)
+                {
+                    return false;
+                }
+                sample = new SysSample
+                {
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    Age = entity.Age,
+                    Bir = entity.Bir,
+                    Photo = entity.Photo,
+                    Note = entity.Note,
+                    CreateTime = entity.CreateTime
+                };
+                if (Rep.Create(sample) == 1)
                 {
                     return true;
                 }
@@ -60,7 +94,7 @@ namespace Apps.BLL
         {
             try
             {
-                if (rep.Delete(id) == 1)
+                if (Rep.Delete(id) == 1)
                 {
                     return true;
                 }
@@ -80,11 +114,22 @@ namespace Apps.BLL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public bool Edit(SysSample entity)
+        public bool Edit(SysSampleModel entity)
         {
             try
             {
-                if (rep.Edit(entity) == 1)
+                SysSample sample = Rep.GetById(entity.Id);
+                if (sample == null)
+                {
+                    return false;
+                }
+                sample.Name = entity.Name;
+                sample.Age = entity.Age;
+                sample.Bir = entity.Bir;
+                sample.Photo = entity.Photo;
+                sample.Note = entity.Note;
+
+                if (Rep.Edit(sample) == 1)
                 {
                     return true;
                 }
@@ -118,16 +163,26 @@ namespace Apps.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SysSample GetById(string id)
+        public SysSampleModel GetById(string id)
         {
-            if (rep.IsExist(id))
+            if (IsExist(id))
             {
-                SysSample entity = rep.GetById(id);
-                return entity;
+                SysSample entity = Rep.GetById(id);
+                SysSampleModel model = new SysSampleModel
+                {
+                    Id = entity.Id,
+                    Name = entity.Name,
+                    Age = entity.Age,
+                    Bir = entity.Bir,
+                    Photo = entity.Photo,
+                    Note = entity.Note,
+                    CreateTime = entity.CreateTime
+                };
+                return model;
             }
             else
             {
-                return null;
+                return new SysSampleModel();
             }
         }
 
@@ -136,9 +191,9 @@ namespace Apps.BLL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool IsExit(string id)
+        public bool IsExist(string id)
         {
-            return rep.IsExist(id);
+            return Rep.IsExist(id);
         }
     }
 }
