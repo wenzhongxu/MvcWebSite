@@ -617,6 +617,10 @@
       <Project>{688914b7-e86a-4162-a710-f9a2cec6f55d}</Project>
       <Name>Apps.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Apps.Core\Apps.Core.csproj">
+      <Project>{5e62cb5a-8040-4364-bc56-872170a25ab6}</Project>
+      <Name>Apps.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Apps.DAL\Apps.DAL.csproj">
       <Project>{0a2ee07d-7c67-486e-a20c-513f8c2c03f4}</Project>
       <Name>Apps.DAL</Name>
