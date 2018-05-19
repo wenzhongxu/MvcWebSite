@@ -172,7 +172,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\SysSampleController.cs" />
+    <Compile Include="Core\LogHandler.cs" />
+    <Compile Include="Core\Verify_code.ashx.cs">
+      <DependentUpon>Verify_code.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,6 +186,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fontawesome\css\font-awesome.min.css" />
+    <Content Include="Content\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\themes\angular.css" />
     <Content Include="Content\themes\black\accordion.css" />
     <Content Include="Content\themes\black\calendar.css" />
@@ -561,13 +568,22 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\themes\material\images\Thumbs.db" />
+    <Content Include="Core\site.config" />
+    <Content Include="Content\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="Core\Verify_code.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -592,6 +608,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\SysSample\Index.cshtml" />
     <Content Include="Views\Shared\_Index_Layout.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -617,6 +634,10 @@
     <ProjectReference Include="..\Apps.BLL\Apps.BLL.csproj">
       <Project>{688914b7-e86a-4162-a710-f9a2cec6f55d}</Project>
       <Name>Apps.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apps.Common\Apps.Common.csproj">
+      <Project>{6e4426b7-4a9d-4af6-b19e-4d92c51b9ba4}</Project>
+      <Name>Apps.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Apps.Core\Apps.Core.csproj">
       <Project>{5e62cb5a-8040-4364-bc56-872170a25ab6}</Project>

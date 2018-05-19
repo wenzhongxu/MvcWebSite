@@ -26,5 +26,13 @@ namespace Apps.Models
         }
     
         public virtual DbSet<SysSample> SysSample { get; set; }
+        public virtual DbSet<SysModule> SysModule { get; set; }
+        public virtual DbSet<SysModuleOperate> SysModuleOperate { get; set; }
+        public virtual DbSet<SysRight> SysRight { get; set; }
+        public virtual DbSet<SysRightOperate> SysRightOperate { get; set; }
+        public virtual DbSet<SysRole> SysRole { get; set; }
+        public virtual DbSet<SysUser> SysUser { get; set; }
+        public virtual DbSet<SysLog> SysLog { get; set; }
+        public virtual DbSet<SysUserConfig> SysUserConfig { get; set; }
     }
 }

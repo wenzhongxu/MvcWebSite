@@ -47,8 +47,7 @@ namespace Apps.Core
         {
             get
             {
-                var childContainer = HttpContext.Current.Items[HttpContextKey] as IUnityContainer;
-                if (childContainer == null)
+                if (!(HttpContext.Current.Items[HttpContextKey] is IUnityContainer childContainer))
                 {
                     HttpContext.Current.Items[HttpContextKey] = childContainer = _container.CreateChildContainer();
                 }

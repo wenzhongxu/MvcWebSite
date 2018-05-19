@@ -47,10 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountRepository.cs" />
+    <Compile Include="SysConfigRepository.cs" />
     <Compile Include="SysSampleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Apps.Common\Apps.Common.csproj">
+      <Project>{6e4426b7-4a9d-4af6-b19e-4d92c51b9ba4}</Project>
+      <Name>Apps.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Apps.IDAL\Apps.IDAL.csproj">
       <Project>{e4adc1a5-f9e8-46ed-be8c-e206e8f6587b}</Project>
       <Name>Apps.IDAL</Name>

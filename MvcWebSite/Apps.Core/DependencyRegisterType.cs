@@ -18,6 +18,8 @@ namespace Apps.Core
         {
             container.RegisterType<ISysSampleBLL, SysSampleBLL>(); // 样例
             container.RegisterType<ISysSampleRepository, SysSampleRepository>();
+            container.RegisterType<IAccountBLL, AccountBLL>(); // 用户
+            container.RegisterType<IAccountRepository, AccountRepository>();
         }
     }
 }
